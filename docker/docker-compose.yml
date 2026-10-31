@@ -1,0 +1,25 @@
+services:
+  ledgerd:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: toolbox/ledgerd:local
+    command: ["/app/ledgerd", "-data", "/app/data/ledger.csv", "-addr", ":8787"]
+    ports:
+      - "8787:8787"
+    volumes:
+      - ../data:/app/data:ro
+      - ledger-var:/app/var
+    restart: unless-stopped
+
+  web:
+    image: nginx:1.27-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ../web:/usr/share/nginx/html:ro
+    depends_on:
+      - ledgerd
+
+volumes:
+  ledger-var:
