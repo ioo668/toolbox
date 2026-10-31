@@ -1,0 +1,17 @@
+var/
+backups/
+target/
+out/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite.gz
+__pycache__/
+*.pyc
+node_modules/
+.idea/
+.vscode/
+.DS_Store
+c/ledger_import
+c/ledger_import.exe

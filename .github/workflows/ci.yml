@@ -1,0 +1,70 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  c:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and count importable rows
+        run: make -C c check
+
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+      - name: Vet and build
+        run: |
+          cd go
+          go vet ./...
+          go build ./cmd/ledgerd
+
+  java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Compile and run the report
+        run: |
+          javac -encoding UTF-8 -d target java/Report.java
+          java -cp target Report data/ledger.csv
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Summarise and validate
+        run: python python/stats.py data/ledger.csv --check
+
+  schema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply schema and seed, then check integrity
+        run: |
+          mkdir -p var
+          sqlite3 var/ledger.db < db/schema.sql
+          sqlite3 var/ledger.db < db/seed.sql
+          sqlite3 var/ledger.db "PRAGMA integrity_check; PRAGMA foreign_key_check;"
+          sqlite3 var/ledger.db "SELECT * FROM daily_totals LIMIT 5;"
+
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the service image
+        run: docker build -f docker/Dockerfile -t ledgerd:ci .
