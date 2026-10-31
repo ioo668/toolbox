@@ -1,0 +1,15 @@
+recorded_on,kind,amount_cents,category,note
+2026-10-03,income,120000,other,freelance invoice 07
+2026-10-04,expense,4350,food,groceries
+2026-10-05,expense,1800,transport,metro top-up
+2026-10-07,expense,9900,tools,server certificate renewal
+2026-10-08,expense,2600,food,late noodles
+2026-10-11,expense,158000,housing,storage VPS monthly
+2026-10-12,income,45000,other,reimbursed hardware
+2026-10-15,expense,3200,entertainment,cinema
+2026-10-18,expense,1450,food,coffee beans
+2026-10-21,expense,6800,tools,domain renewal
+2026-10-24,expense,2100,transport,ride home
+2026-10-26,income,99000,other,consulting call
+2026-10-29,expense,5400,food,weekly shop
+2026-10-30,expense,900,other,parking
