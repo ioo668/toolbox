@@ -1,0 +1,88 @@
+:root {
+  --bg: #101418;
+  --panel: #171d24;
+  --line: #232c36;
+  --text: #e6edf3;
+  --muted: #8b98a5;
+  --income: #3fb950;
+  --expense: #f85149;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2rem 1.5rem 4rem;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+header { max-width: 46rem; margin: 0 auto 2rem; }
+main { max-width: 46rem; margin: 0 auto; }
+
+h1 { margin: 0; font-size: 1.6rem; letter-spacing: .01em; }
+h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); margin: 2.5rem 0 1rem; }
+.source { margin: .35rem 0 0; color: var(--muted); font-size: .85rem; }
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.totals > div {
+  background: var(--panel);
+  padding: 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.totals span { font-variant-numeric: tabular-nums; font-size: 1.35rem; }
+.totals small { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: .7rem; }
+
+#income { color: var(--income); }
+#expense { color: var(--expense); }
+
+.bars { list-style: none; margin: 0; padding: 0; }
+
+.bars li {
+  display: grid;
+  grid-template-columns: 8rem 1fr 6rem;
+  align-items: center;
+  gap: .75rem;
+  padding: .4rem 0;
+  font-size: .9rem;
+}
+
+.bars i {
+  display: block;
+  height: 8px;
+  background: linear-gradient(90deg, #2f81f7, #6d5ef2);
+  border-radius: 4px;
+}
+
+.bars b { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+
+table { width: 100%; border-collapse: collapse; }
+
+th, td {
+  text-align: left;
+  padding: .5rem .6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+th { color: var(--muted); font-weight: 500; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.expense { color: var(--expense); }
+td.income { color: var(--income); }
+
+@media (max-width: 560px) {
+  .totals { grid-template-columns: 1fr; }
+  .bars li { grid-template-columns: 6rem 1fr 5rem; }
+}

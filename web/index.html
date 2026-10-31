@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ledger</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Ledger</h1>
+    <p class="source" id="source">connecting…</p>
+  </header>
+
+  <main>
+    <section class="totals" aria-label="Totals">
+      <div><span id="income">–</span><small>income</small></div>
+      <div><span id="expense">–</span><small>expense</small></div>
+      <div><span id="balance">–</span><small>balance</small></div>
+    </section>
+
+    <section aria-label="Expenses by category">
+      <h2>Expenses by category</h2>
+      <ul class="bars" id="categories"></ul>
+    </section>
+
+    <section aria-label="Daily entries">
+      <h2>Entries</h2>
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Category</th><th>Note</th><th class="num">Amount</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
